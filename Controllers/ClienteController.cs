@@ -168,5 +168,23 @@ namespace LOCACOES.API.Controllers
             return Ok(consulta);
         }
 
+        [HttpGet("Entrar/{cpf}")]
+        public ActionResult Entrar([FromRoute] string cpf)
+        {
+            try
+            {
+                var entrar = _context.Clientes.Include(x => x.Locacoes).SingleOrDefault(x => x.Cpf == cpf);
+                if (entrar == null)
+                    return BadRequest("Usuario não encontrado");
+
+                return Ok(entrar);
+                
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 }

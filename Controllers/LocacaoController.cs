@@ -26,10 +26,10 @@ namespace LOCACOES.API.Controllers
                 var locacoes = (from fl in _context.Filmes.AsNoTracking()
                                 join lc in _context.Locacaos.AsNoTracking()
                                 on fl.Id equals lc.Id_Filme
-                                select new { fl, lc }
+                                select new { fl.Titulo }
                       ).Distinct().ToList();
 
-
+                
                 if (locacoes.Any())
                     return Ok(locacoes);
 
